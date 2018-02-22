@@ -1,0 +1,28 @@
+use Db01Test01
+
+create table product1349205
+(	id int Identity(1000,1),
+	pname varchar(30),
+	cat varchar(3),
+	up bigint,
+	tna int,
+	descr varchar(80)
+);
+
+create proc sp_insertproduct1349205_1
+@pn varchar(30), @c varchar(3), @u bigint, @t int, @desc varchar(80) ,@sid int out
+as
+begin
+insert into product1349205 values(@pn,@c, @u, @t, @desc);
+set @sid= @@IDENTITY
+end;
+
+select * from product1349205;
+
+exec sp_insertproduct1349205_1 'Bumper','A', 1.2, 4, 'abcdefghijklmn' ,0;
+
+create view showtable
+as
+select * from product1349205;
+
+truncate table product1349205;
